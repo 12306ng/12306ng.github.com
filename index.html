@@ -1,2 +1,72 @@
-12306ng
-<a href="https://github.com/12306ng">360buyll</a>
+<h3  align="center"><strong class="ab">  12306NG项目群定义与发展建议 </strong>
+  </p>
+</h1>
+<h2 class="aa"> 1、综述</h2>
+   <p class="ac" style="text-indent:2em">12306NG项目的初衷是帮助改进12306.CN网站的用户体验，具体见：http://12306ng.org/thread-726-1-1.html。项目的发起者希望该项目能提供基于互联网的高并发、大流量的交易网站架构。</p>
+   <p class="ac" style="text-indent:2em"> 12306NG实行委员会指导下的项目经理负责制度。委员会目前还在筹备中，项目经理正在招募。本文档重点界定各项目的目标，方便大家报名参与各个子项目。  </p>
+   <p class="ac" style="text-indent:2em">顺便说明，项目组织架构（见http://12306ng.org/thread-1084-1-1.html）中，专家团包括业务专家和技术专家，主要起到咨询、顾问的作用，为大家答疑解惑。秘书组则是本项目的支持机构，包括工具、文档、会议召集、社区发展、法务、PR等，请有兴趣的非技术类的热心志愿者报名参与。  </p>
+   <p class="ac" style="text-indent:2em">鉴于原有客票系统已演化到6.0版，并同时涉及电话、售票点、互联网等多渠道售票，系统复杂，根据项目初始团队的充分讨论，见：http://12306ng.org/thread-956-1-1.html ，拟以以下图示方式，逐层解决12306网站现有问题。</p>
+<li>
+  <div class="img" align="center"><img src="http://12306ng.org/data/attachment/forum/201210/08/181224fxe0eqeu0euliu6l.bmp" alt="" width="336" height="307" /></div></li>
+<p style="text-indent:2em"> <span class="ac">据此，此次共开设以下10个子项目：</span></p>
+<p class="ac" style="text-indent:2em"> 1、  业务网关，LegacySystemGateway  </p>
+<p class="ac" style="text-indent:2em">2、	票池PoolManager  </p>
+<p class="ac" style="text-indent:2em">3、	基于MySQL的分布式数据库中间件NgSQL</p>
+<p class="ac" style="text-indent:2em"> 4、	黄牛判断，恶意流量判定，TrafficFilter  </p>
+<p class="ac" style="text-indent:2em">5、	统一用户认证系统Passport  </p>
+<p class="ac" style="text-indent:2em">6、	交易网关TransactionGateway</p>
+<p class="ac" style="text-indent:2em"> 7、	服务网关ServiceGetway</p>
+<p class="ac" style="text-indent:2em"> 8、	Web订票系统，12306Ng.CN  </p>
+<p class="ac" style="text-indent:2em">9、	Android订票客户端,12306NG for Android  </p>
+<p class="ac" style="text-indent:2em">10、	iOS订票客户端, 12306NG for iOS
+  
+  各个子项目将分别招募项目负责人，在项目委员会指导下，独立开展各个子项目的工作。 </p>
+<h2 class="aa">2、业务网关，LegacySystemGateway，NgLSG</h2>
+<p class="ac" style="text-indent:2em">  NgLSG是与原有业务系统通讯的协议层，主要设计要求：</p>
+<p class="ac" style="text-indent:2em"> 1、	定义与业务层交互的数据协议、接口协议  </p>
+<p class="ac" style="text-indent:2em">2、	按照业务系统的SLA(可配置)与业务系统交互  </p>
+<p class="ac" style="text-indent:2em">3、	对前端提供Service</p>
+<p class="ac" style="text-indent:2em"> 4、	能够承受来自前端的海量请求  </p>
+<p class="ac" style="text-indent:2em">5、	可水平扩展</p>
+<h2 class="aa"> 3、票池PoolManager, NgPM
+  NgPM</h2>
+<p class="ac" style="text-indent:2em">实现以下需求：</p>
+<p class="ac" style="text-indent:2em"> 1、	接受来自业务网关的批量票源，以初始化余票模型</p>
+<p class="ac" style="text-indent:2em"> 2、	按照业务规则，对前端提供订票、退票、改签等服务  </p>
+<p class="ac" style="text-indent:2em">3、	维护一个余票模型，智能地进行余票管理  </p>
+<p class="ac" style="text-indent:2em">4、	优化数据结构，采用分布式处理技术</p>
+<p class="ac" style="text-indent:2em"> 5、	建议基于Redist和NgSQL优化性能</p>
+<p class="ac" style="text-indent:2em"> 6、	能够承受来自前端的海量交易请求</p>
+<p class="ac" style="text-indent:2em"> 7、	可水平扩展 </p>
+<h2 class="aa">4、基于MySQL的分布式数据库中间件NgSQL</h2>
+<p style="text-indent:2em"> NgSQL提供一个分布式数据库中间件，她实现了：</p>
+<p style="text-indent:2em"> 1、	可管理、可配置的、支持一致性Hash的MySQL集群  </p>
+<p style="text-indent:2em">2、	对应用提供类似单一实例的MySQL服务</p>
+<p style="text-indent:2em"> 3、	解决其它模块涉及到的分布式数据存储、交易问题  </p>
+<p style="text-indent:2em">4、	可水平扩展 </p>
+<h2 class="aa">5、黄牛判断，恶意流量判定，TrafficFilter，NgTF  </h2>
+<p class="ac" style="text-indent:2em">NgTF负责恶意流量、恶意用户的判定，过滤之，以提升流量质量、从而提升用户体验。
+  统一用户认证系统Passport, NgSSO
+  NgSSO提供提供</p>
+<h2 class="aa">6、统一用户登录验证接口。</h2>
+<p class="ac" style="text-indent:2em"> 交易网关TransactionGateway, NgTG
+  NgTG实现以下需求：</p>
+<p class="ac" style="text-indent:2em"> 1、	对前端提供订票交易服务  </p>
+<p class="ac" style="text-indent:2em">2、	根据交易请求向业务网关或票池请求交易  </p>
+<p class="ac" style="text-indent:2em">3、	支持多种交易请求提交模型，如序列式、摇号式、预约式 </p>
+<h2 class="aa">7、服务网关ServiceGetway，NgSG</h2>
+<p class="ac" style="text-indent:2em"> NgSG是所有提供对外服务的模块依赖的一个组件，她实现：  </p>
+<p class="ac" style="text-indent:2em">1、	管理各个服务(Web Service)的SLA  </p>
+<p class="ac" style="text-indent:2em">2、	管道化或队列化服务请求，按照SLA提交</p>
+<p class="ac"style="text-indent:2em"> 3、	支持水平扩展，可承受海量服务请求</p>
+<h2 class="aa"> 8、Web订票系统，12306Ng.CN</h2>
+<p class="ac" style="text-indent:2em"> 1、	该模块直接调用其它模块提供的服务  </p>
+<p class="ac" style="text-indent:2em">2、	实现了查询、订票、预订、注册、登录等功能。  </p>
+<p class="ac" style="text-indent:2em">3、	可考虑支持旅行线路计划  </p>
+<p class="ac" style="text-indent:2em">4、	界面友好，操作方便，用户体验好</p>
+<h2 class="aa"> 9、Android订票客户端,12306NG for Android  </h2>
+<p class="ac" style="text-indent:2em">Web功能的客户端实现。
+  可根据Andriod特点提升用户体验。</p>
+<h2 class="aa"> 10、iOS订票客户端, 12306NG for iOS</h2>
+<p class="ac" style="text-indent:2em"> Web功能的客户端实现。
+  可根据iOS特点提升用户体验。 </p>
